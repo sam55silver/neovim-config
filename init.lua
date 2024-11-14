@@ -1029,5 +1029,42 @@ require('lazy').setup({
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+-- Set indentation for Python
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.expandtab = true
+  end,
+})
+
+-- Set indentation for JavaScript
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'javascript',
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+
+-- Set indentation for Go
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'go',
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.expandtab = false -- Use tabs instead of spaces
+  end,
+})
+
+-- Set indentation for YAML
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'yaml',
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
