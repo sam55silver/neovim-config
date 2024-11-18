@@ -576,6 +576,7 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
+        denols = {},
         prettier = {},
         tailwindcss = {},
         astro = {},
@@ -956,3 +957,15 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.expandtab = true
   end,
 })
+
+local nvim_lsp = require 'lspconfig'
+nvim_lsp.denols.setup {
+  on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+}
+
+nvim_lsp.tsserver.setup {
+  on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern 'package.json',
+  single_file_support = false,
+}
